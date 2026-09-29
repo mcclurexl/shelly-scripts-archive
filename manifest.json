@@ -1,0 +1,28 @@
+{
+  "name": "Meine eigenen Skripte",
+  "description": "Sammlung meiner benutzerdefinierten Shelly-Automatisierungen",
+  "version": "1.0.0",
+  "author": "mccluexl",
+  "scripts": [
+    {
+      "name": "Jalousiesteuerung NO",
+      "description": "Hausseite Nord-Ost (SZ)",
+      "path": "src/jalousie-no.js"
+    }
+    {
+      "name": "Jalousiesteuerung SO",
+      "description": "Hausseite Süd-Ost (Fluss)",
+      "path": "src/jalousie-so.js"
+    }
+    {
+      "name": "Jalousiesteuerung SW",
+      "description": "Hausseite Süd-West (Innenstadt)",
+      "path": "src/jalousie-sw.js"
+    }
+    {
+      "name": "Jalousiesteuerung NW",
+      "description": "Hausseite Nord-West (Hang)",
+      "path": "src/jalousie-no.nw"
+    }
+  ]
+}
