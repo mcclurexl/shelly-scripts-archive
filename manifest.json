@@ -5,24 +5,24 @@
   "author": "mccluexl",
   "scripts": [
     {
-      "fname": "Jalousiesteuerung NO",
+      "fname": "src/jalousie-no.shelly.js"
+      "title": "Jalousiesteuerung-NO",
       "description": "Hausseite Nord-Ost (SZ)",
-      "path": "src/jalousie-no.shelly.js"
     }
     {
-      "fname": "Jalousiesteuerung SO",
+      "fname": "src/jalousie-so.shelly.js"
+      "title": "Jalousiesteuerung-SO",
       "description": "Hausseite Süd-Ost (Fluss)",
-      "path": "src/jalousie-so.shelly.js"
     }
     {
-      "fname": "Jalousiesteuerung SW",
+      "fname": "src/jalousie-sw.shelly.js"
+      "title": "Jalousiesteuerung-SW",
       "description": "Hausseite Süd-West (Innenstadt)",
-      "path": "src/jalousie-sw.shelly.js"
     }
     {
-      "fname": "Jalousiesteuerung NW",
+      "fname": "src/jalousie-no.shelly.nw"
+      "title": "Jalousiesteuerung-NW",
       "description": "Hausseite Nord-West (Hang)",
-      "path": "src/jalousie-no.shelly.nw"
     }
   ]
 }
