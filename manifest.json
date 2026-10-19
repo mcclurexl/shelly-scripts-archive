@@ -1,14 +1,9 @@
-//  "name": "Meine eigenen Skripte",
-//  "description": "Sammlung meiner benutzerdefinierten Shelly-Automatisierungen",
-//  "version": "1.0.0",
-//  "author": "mccluexl",
-//  "scripts":
 [
     {
       "fname": "src/jalousie-no.shelly.js"
       "title": "Jalousiesteuerung-NO",
       "description": "Hausseite Nord-Ost (SZ)",
-      "tags": [] // Schlagwörter zum Suchen
+      "tags": []
     },
     {
       "fname": "src/jalousie-so.shelly.js"
