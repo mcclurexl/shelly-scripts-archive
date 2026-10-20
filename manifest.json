@@ -6,6 +6,11 @@
       "tags": [""]
     },
     {
+      "fname": "src/jalousie-nw.shelly.js",
+      "title": "Jalousiesteuerung-NW",
+      "description": "Hausseite Nord-West (Hang)"
+    },
+    {
       "fname": "src/jalousie-so.shelly.js",
       "title": "Jalousiesteuerung-SO",
       "description": "Hausseite Süd-Ost (Fluss)"
@@ -14,11 +19,6 @@
       "fname": "src/jalousie-sw.shelly.js",
       "title": "Jalousiesteuerung-SW",
       "description": "Hausseite Süd-West (Innenstadt)"
-    },
-    {
-      "fname": "src/jalousie-no.shelly.js",
-      "title": "Jalousiesteuerung-NW",
-      "description": "Hausseite Nord-West (Hang)"
     },
     {
       "fname": "src/all-jalousie-start.shelly.js",
