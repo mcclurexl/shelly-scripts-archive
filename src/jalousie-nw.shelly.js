@@ -26,7 +26,7 @@ let CFG = {
 
   // --- Wetterdaten vom Hub ---
   HUB_IP: "192.168.178.185",   // IP des Shelly-Bluetooth-Hub
-  HUB_SCRIPT_ID: 2,            // ID des Skripts auf dem Hub, das den Endpunkt bereitstellt
+  HUB_SCRIPT_ID: 1,            // ID des Skripts auf dem Hub, das den Endpunkt bereitstellt
   HUB_ENDPOINT: "weather",     // Name des Endpunkts (HTTPServer.registerEndpoint)
   WX_INTERVAL_S: 30,           // Abfrageintervall zum Hub in Sekunden
   WX_MAX_FAILS: 3,             // so viele Fehlversuche in Folge -> Wetterdaten gelten als nicht vorhanden
