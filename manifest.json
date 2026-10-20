@@ -29,5 +29,10 @@
       "fname": "src/all-stop.shelly.js",
       "title": "STOP-SKRIPTE",
       "description": "Stoppt alle Skripte auf den hinterlegten Aktoren"
+    },
+    {
+      "fname": "src/weather-hub.shelly.js",
+      "title": "Weather-Hub",
+      "description": "Skript auf dem BT-Hub mit Verbindung zur WS90. Stellt die Wetterdaten auf einem JSON-Abrufpunkt zur Verfügung"
     }
 ]
