@@ -1,5 +1,11 @@
 // Skript zur Vergüngstellung eines JSON-Endpunkts auf dem BT-Hub zum Abruf der Wetterdaten für andere Geräte
-let SENSORS = { temp: 0x45, wind: 0x44, gust: 0x44, rain: 0x20, lux: 0x05 };  // IDs angepasst aus https://shelly-api-docs.shelly.cloud/docs-ble/Devices/BLU_ZB/wstation/#bthome-sensor-data-objects
+let SENSORS = { 
+  lux: 201, 
+  rain: 202,
+  wind: 203,
+  gust: 204,
+  temp: 211
+};
 
 HTTPServer.registerEndpoint("weather", function (req, res) {
   let now = Shelly.getComponentStatus("sys").unixtime;
