@@ -19,5 +19,15 @@
       "fname": "src/jalousie-no.shelly.js",
       "title": "Jalousiesteuerung-NW",
       "description": "Hausseite Nord-West (Hang)"
+    },
+    {
+      "fname": "src/all-jalousie-start.shelly.js",
+      "title": "Alle Jalousien an",
+      "description": "Startet die Automatik auf allen Jalousie-Aktoren"
+    },
+    {
+      "fname": "src/all-stop.shelly.js",
+      "title": "STOP-SKRIPTE",
+      "description": "Stoppt alle Skripte auf den hinterlegten Aktoren"
     }
 ]
