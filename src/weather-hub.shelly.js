@@ -7,7 +7,7 @@ let SENSORS = {
   temp: 211
 };
 
-HTTPServer.registerEndpoint("weather", function (req, res) {
+HTTPServer.registerEndpoint("weather-hub", function (req, res) {
   let now = Shelly.getComponentStatus("sys").unixtime;
   let keys = Object.keys(SENSORS);
   let out = { ts: now };
