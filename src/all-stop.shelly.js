@@ -25,7 +25,7 @@ function stopNextScript() {
 
   print("Stoppe Skript auf: " + device.name);
 
-  HTTP.post(url, body, function(res, err) {
+  HTTPServer.post(url, body, function(res, err) {
     if (err !== null) {
       print("Fehler bei " + device.name + ": " + err);
     } else {
