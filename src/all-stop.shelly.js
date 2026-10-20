@@ -5,7 +5,7 @@
 
 // Geräte-Liste mit IP und Script-ID konfigurieren
 var devices = [
-  { ip: "192.168.178.220", scriptId: 1, name: "Jalousie arbZ NW" },
+  { ip: "192.168.178.220", scriptId: 1, name: "Jalousie ArbZ NW" },
   { ip: "192.168.178.221", scriptId: 1, name: "Jalousie ..." },
   { ip: "192.168.1178.221", scriptId: 1, name: "Jalousie ..." }
   // etc.
