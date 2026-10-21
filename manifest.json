@@ -1,15 +1,5 @@
 [
     {
-      "fname": "src/all-jalousie-start.shelly.js",
-      "title": "Alle Jalousien an",
-      "description": "Startet die Automatik auf allen Jalousie-Aktoren"
-    },
-    {
-      "fname": "src/all-stop.shelly.js",
-      "title": "STOP-SKRIPTE",
-      "description": "Stoppt alle Skripte auf den hinterlegten Aktoren"
-    },
-    {
       "fname": "src/jalousie-no.shelly.js",
       "title": "Jalousiesteuerung-NO",
       "description": "Hausseite Nord-Ost (SZ)",
@@ -29,6 +19,11 @@
       "fname": "src/jalousie-sw.shelly.js",
       "title": "Jalousiesteuerung-SW",
       "description": "Hausseite Süd-West (Innenstadt)"
+    },
+    {
+      "fname": "src/start-stop-scripts.shelly.js",
+      "title": "Start/Stop Skripte auf anderen Shellys",
+      "description": "Vier Knöpfe mit Stopp, Start, Stopp Autostart, Start Autostart"
     },
     {
       "fname": "src/weather-hub.shelly.js",
