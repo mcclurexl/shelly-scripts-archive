@@ -1,22 +1,25 @@
 // =====================================================================
 // Master-Skript: Skripte auf mehreren Shelly-Geräten per IP steuern
 // Aktionen:
-//   "start"   = Skript starten (nur bis zum nächsten Neustart, falls Autostart aus)
-//   "stop"    = Skript stoppen (nach Neustart startet es wieder, falls Autostart an)
-//   "enable"  = Autostart einschalten + Skript starten   (dauerhaft an)
-//   "disable" = Skript stoppen + Autostart ausschalten   (dauerhaft aus)
+//   "start"         = Skript starten (Autostart bleibt unverändert)
+//   "stop"          = Skript stoppen (Autostart bleibt unverändert)
+//   "autostart_on"  = nur Autostart einschalten (Skript wird NICHT gestartet/gestoppt)
+//   "autostart_off" = nur Autostart ausschalten (Skript wird NICHT gestartet/gestoppt)
+//   "enable"        = Autostart einschalten + Skript starten
+//   "disable"       = Skript stoppen + Autostart ausschalten
 // Aufruf im Browser/per curl:
 //   http://<IP-Master>/script/<Skript-ID>/scripts?action=stop
 // Oder aus eigenem Code:  setScripts("stop");
 // Oder per Knopfdruck in der Shelly-App über virtuelle Buttons (siehe BUTTONS unten)
+  // vier buttons unter Komponenten->virtuelle Komponenten->Button erstellen. IDs müssen 200-203 sein (s.u.). Buttons zu einer Gruppe hinzufügen
 // ACHTUNG: Das Master-Skript nicht auf das eigene Skript wirken lassen
 //          (Master-IP nicht in DEVICES eintragen oder andere Skript-ID verwenden).
 // =====================================================================
 
 let DEVICES = [
   { ip: "192.168.178.220" },
-  { ip: "192.168.178.221" },
-  { ip: "192.168.178.222", id: 2 }   // abweichende Skript-ID für dieses Gerät
+  { ip: "192.168.178.102" },
+  { ip: "192.168.178.103", id: 2 }   // abweichende Skript-ID für dieses Gerät
 ];
 let DEFAULT_ID = 1;   // Skript-ID, wenn bei einem Gerät keine id angegeben ist
 let TIMEOUT_S = 5;
@@ -27,19 +30,24 @@ let TIMEOUT_S = 5;
 let BUTTONS = {
   "button:200": "stop",     // z.B. "Alle Jalousie-Skripte stoppen"
   "button:201": "start",    // "Alle Jalousie-Skripte starten"
-  "button:202": "disable",  // "Alle dauerhaft aus"
-  "button:203": "enable"    // "Alle dauerhaft an"
+  "button:202": "autostart_off",  // "Autostart aus" (Skript läuft/steht weiter wie bisher)
+  "button:203": "autostart_on"    // "Autostart an"  (Skript läuft/steht weiter wie bisher)
 };
 
 let jobs = [];
+let jobIdx = 0;        // nächster Auftrag (mJS kennt shift() nicht)
 let running = false;
 let failMap = {};
+let failCount = 0;
+let failList = "";
 let doneCb = null;
 
 // Einzelne RPC-Schritte je Aktion: [Methode, Parameter]
 function stepsFor(action, id) {
   if (action === "start") return [["Script.Start", { id: id }]];
   if (action === "stop") return [["Script.Stop", { id: id }]];
+  if (action === "autostart_on") return [["Script.SetConfig", { id: id, config: { enable: true } }]];
+  if (action === "autostart_off") return [["Script.SetConfig", { id: id, config: { enable: false } }]];
   if (action === "enable") {
     return [["Script.SetConfig", { id: id, config: { enable: true } }],
             ["Script.Start", { id: id }]];
@@ -53,19 +61,19 @@ function stepsFor(action, id) {
 
 // Aufträge nacheinander abarbeiten (Shelly erlaubt nur wenige parallele HTTP-Aufrufe)
 function pump() {
-  if (jobs.length === 0) {
+  if (jobIdx >= jobs.length) {
     running = false;
-    let failed = Object.keys(failMap);
-    print("Fertig:", DEVICES.length - failed.length, "von", DEVICES.length, "Geraeten ok",
-          failed.length > 0 ? ("-> Fehler bei: " + failed.join(", ")) : "");
+    print("Fertig:", DEVICES.length - failCount, "von", DEVICES.length, "Geraeten ok",
+          failCount > 0 ? ("-> Fehler bei: " + failList) : "");
     if (doneCb) {
       let cb = doneCb;
       doneCb = null;
-      cb(failed);
+      cb(failList);
     }
     return;
   }
-  let j = jobs.shift();
+  let j = jobs[jobIdx];
+  jobIdx++;
   Shelly.call("HTTP.POST", {
     url: "http://" + j.ip + "/rpc",
     body: JSON.stringify({ id: 1, method: j.method, params: j.params }),
@@ -78,14 +86,18 @@ function pump() {
       if (!b || b.error) ok = false;   // Antwort fehlerhaft oder RPC-Fehler
     }
     if (!ok) {
-      failMap[j.ip] = true;
+      if (!failMap[j.ip]) {
+        failMap[j.ip] = true;
+        failCount++;
+        failList += (failList === "" ? "" : ", ") + j.ip;
+      }
       print("Fehler:", j.ip, j.method, ec, res ? res.code : "-");
     }
     pump();
   });
 }
 
-// Hauptfunktion. cb (optional) wird am Ende mit der Liste der fehlgeschlagenen IPs aufgerufen.
+// Hauptfunktion. cb (optional) wird am Ende mit einem Text der fehlgeschlagenen IPs aufgerufen ("" = alle ok).
 // Rückgabe: true = gestartet, false = Aktion ungültig oder es läuft schon ein Durchlauf
 function setScripts(action, cb) {
   if (running) {
@@ -97,7 +109,10 @@ function setScripts(action, cb) {
     return false;
   }
   jobs = [];
+  jobIdx = 0;
   failMap = {};
+  failCount = 0;
+  failList = "";
   for (let i = 0; i < DEVICES.length; i++) {
     let d = DEVICES[i];
     let id = (d.id !== undefined) ? d.id : DEFAULT_ID;
