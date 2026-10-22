@@ -21,6 +21,11 @@
       "description": "Hausseite Süd-West (Innenstadt)"
     },
     {
+      "fname": "src/solepumpenregler.shelly.js",
+      "title": "Solepumpenregler",
+      "description": "Skript zum Steuern des Solempumenreglers der Lüftungsanlage"
+    },
+    {
       "fname": "src/start-stop-scripts.shelly.js",
       "title": "Start/Stop Skripte auf anderen Shellys",
       "description": "Vier Knöpfe mit Stopp, Start, Stopp Autostart, Start Autostart"
@@ -29,10 +34,5 @@
       "fname": "src/weather-hub.shelly.js",
       "title": "Weather-Hub",
       "description": "Skript auf dem BT-Hub mit Verbindung zur WS90. Stellt die Wetterdaten auf einem JSON-Abrufpunkt zur Verfügung"
-    },
-     {
-      "fname": "src/solepumpenregler.shelly.js",
-      "title": "Solepumpenregler",
-      "description": "Skript zum Steuern des Solempumenreglers der Lüftungsanlage"
     }
 ]
