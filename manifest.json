@@ -1,5 +1,17 @@
 [
     {
+      "fname": "src/jalousie-config-client.shelly.js",
+      "title": "Jalousiesteuerung-client",
+      "description": "Ruft die Daten des Zentralskripts auf dem weatherhub ab",
+      "tags": [""]
+    },
+    {
+      "fname": "src/jalousie-config-hub.shelly.js",
+      "title": "Jalousiesteuerung-hub",
+      "description": "Zentrale Datenbasis der Konfiguration aller Geräte",
+      "tags": [""]
+    },
+    {
       "fname": "src/jalousie-no.shelly.js",
       "title": "Jalousiesteuerung-NO",
       "description": "Hausseite Nord-Ost (SZ)",
@@ -19,6 +31,11 @@
       "fname": "src/jalousie-sw.shelly.js",
       "title": "Jalousiesteuerung-SW",
       "description": "Hausseite Süd-West (Innenstadt)"
+    },
+    {
+      "fname": "src/jalousie-universal.shelly.js",
+      "title": "Jalousiesteuerung-Universal",
+      "description": "Config auf Weatherhub in jalousie-config-hub; client-config-script muss zusätzlich laufen"
     },
     {
       "fname": "src/solepumpenregler.shelly.js",
